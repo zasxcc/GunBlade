@@ -6,8 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     public float rotSpeed = 200.0f;
     public float playerMoveSpeed = 5.0f;
-    float mx;
-    float my;
+    private float mx;
+    private float my;
+
 
     CharacterController cc;
 

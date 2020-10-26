@@ -5,22 +5,22 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     private Vector3 direction;
-    public void Shoot(Vector3 direction)
+    private Transform tr;
+    private float speed = 100.0f;
+
+    private void Awake()
     {
-        this.direction = direction;
-        Invoke("DestroyBullet", 5f);
+        
     }
 
-
-
-    public void DestroyBullet()
+    private void Start()
     {
-        ObjectPool.ReturnObject(this);
+        tr = GetComponent<Transform>();
     }
 
-
-    void Update()
+    void FixedUpdate()
     {
-        transform.Translate(direction);
+        tr.Translate(Vector3.forward * speed * Time.deltaTime, Space.Self);
     }
+    
 }
