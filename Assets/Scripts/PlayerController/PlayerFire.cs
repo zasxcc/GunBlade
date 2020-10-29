@@ -9,9 +9,14 @@ public class PlayerFire : MonoBehaviour
     private ObjectPool op;
 
     private int missileCount = 0;
-    private float range;
     public int missileTimer = 0;
-    public float accuracy = 0.000f;
+
+    private int heatGage =0;
+    public int heatGageSpeed = 1;
+    public int maxHeatGage = 300;
+
+    private bool isGunFire = false;
+    public float accuracy = 0.000000000f;
 
     void Start()
     {
@@ -20,7 +25,23 @@ public class PlayerFire : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetButton("Fire2") && missileTimer == 0)
+        //미니건 
+        if (Input.GetButton("Fire1"))
+        {
+            GunFire();
+            //산탄원 커짐
+            accuracy += 0.0002f;
+            isGunFire = true;
+        }
+        else
+        {
+            //산탄원 회복
+            if (accuracy > 0.00f)
+                accuracy -= 0.0003f;
+            isGunFire = false;
+        }
+        //미사일
+        if (Input.GetButton("Fire2") && missileTimer == 0)
         {
             FireMissile();
             missileTimer = 50;
@@ -31,16 +52,13 @@ public class PlayerFire : MonoBehaviour
                 missileTimer -= 1;
         }
 
-        if(Input.GetButton("Fire1"))
-        {
-            GunFire();
-            accuracy += 0.0002f;
-        }
-        else
-        {
-            if(accuracy > 0.00f)
-                accuracy -= 0.0003f;
-        }
+        if (isGunFire && heatGage < maxHeatGage)
+            heatGage += heatGageSpeed;
+        else if (!isGunFire && heatGage > 1)
+            heatGage -= heatGageSpeed;
+
+        Debug.LogError(heatGage);
+        
     }
     private void GunFire()
     {
@@ -48,8 +66,9 @@ public class PlayerFire : MonoBehaviour
         if (Physics.Raycast(firePos.position, firePos.transform.forward + Random.onUnitSphere * accuracy, out hit))
         {
             GameObject hitSpark = Instantiate(hitSparkPrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
-            Destroy(hitSpark, 0.5f);
+            Destroy(hitSpark, 1.0f);
         }
+        
     }
     private void FireMissile()
     {
