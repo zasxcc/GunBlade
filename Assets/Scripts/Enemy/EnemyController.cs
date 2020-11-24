@@ -18,22 +18,24 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent nvAgent;
     private Transform tr;
     private Transform targetTransform;
-    private Animator anim;
+
+    void Awake()
+    {
+
+    }
 
     void Start()
     {
         tr = GetComponent<Transform>();
-        anim = GetComponent<Animator>();
+        nvAgent = GetComponent<NavMeshAgent>();
 
         //추적할 오브젝트 태그
         targetTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
-        nvAgent = GetComponent<NavMeshAgent>();
-
+    
         //추적 position 설정
         nvAgent.destination = targetTransform.position;
 
         StartCoroutine(CheckState());
-        StartCoroutine(CheckStateForAction());
     }
 
     IEnumerator CheckState()
@@ -72,33 +74,23 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    IEnumerator CheckStateForAction()
+
+    void Update()
     {
-        while(!isDead)
+        if (!isDead)
         {
-            switch(currState)
+            switch (currState)
             {
                 case CurrentState.idle:
-                    nvAgent.Stop();
+                    //nvAgent.Stop();
                     break;
                 case CurrentState.move:
                     nvAgent.SetDestination(targetTransform.position);
-                    nvAgent.Resume();
+                    //nvAgent.Resume();
                     break;
                 case CurrentState.attack:
                     break;
             }
         }
-        yield return null;
-    }
-
-    void Awake()
-    {
-        
-    }
-
-    void Update()
-    {
-       
     }
 }
