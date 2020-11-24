@@ -11,8 +11,7 @@ public class EnemyController : MonoBehaviour
     public int HP;
     public float speed;
     private bool isDead = false;
-    public float traceDistance = 15.0f;
-    public float attackDistance = 3.2f;
+    public float attackDistance = 10.0f;
 
 
     private NavMeshAgent nvAgent;
@@ -30,7 +29,7 @@ public class EnemyController : MonoBehaviour
         nvAgent = GetComponent<NavMeshAgent>();
 
         //추적할 오브젝트 태그
-        targetTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        targetTransform = GameObject.FindWithTag("NavTarget").GetComponent<Transform>();
     
         //추적 position 설정
         nvAgent.destination = targetTransform.position;
@@ -50,12 +49,12 @@ public class EnemyController : MonoBehaviour
             if(dist <= attackDistance)
             {
                 currState = CurrentState.attack;
-
+                nvAgent.Stop();
                 //애니메이션적용
 
                 //
             }
-            else if(dist <= traceDistance)
+            else if(dist > attackDistance)
             {
                 currState = CurrentState.move;
 
@@ -82,12 +81,14 @@ public class EnemyController : MonoBehaviour
             switch (currState)
             {
                 case CurrentState.idle:
-                    //nvAgent.Stop();
+                    nvAgent.Stop();
                     break;
+
                 case CurrentState.move:
                     nvAgent.SetDestination(targetTransform.position);
-                    //nvAgent.Resume();
+                    nvAgent.Resume();
                     break;
+
                 case CurrentState.attack:
                     break;
             }

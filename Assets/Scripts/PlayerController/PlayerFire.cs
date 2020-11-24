@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerFire : MonoBehaviour
 {
     public GameObject hitSparkPrefab;
-    public Transform firePos;
+    public Transform gunFirePos;
+    public Transform missileFirePos;
     private ObjectPool op;
 
     private int missileCount = 0;
@@ -63,7 +64,7 @@ public class PlayerFire : MonoBehaviour
     private void GunFire()
     {
         RaycastHit hit;
-        if (Physics.Raycast(firePos.position, firePos.transform.forward + Random.onUnitSphere * accuracy, out hit))
+        if (Physics.Raycast(gunFirePos.position, gunFirePos.transform.forward + Random.onUnitSphere * accuracy, out hit))
         {
             GameObject hitSpark = Instantiate(hitSparkPrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
             Destroy(hitSpark, 1.0f);
@@ -77,6 +78,6 @@ public class PlayerFire : MonoBehaviour
         {
             missileCount = 0;
         }
-        op.PlayerMissileCreate(missileCount, firePos);
+        op.PlayerMissileCreate(missileCount, missileFirePos);
     }
 }
