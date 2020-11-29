@@ -6,13 +6,12 @@ public class PlayerController : MonoBehaviour
 {
     public float rotSpeed = 200.0f;
     public float playerMoveSpeed = 5.0f;
+    public float HP = 100.0f;
     private float mx;
     private float my;
 
-
     CharacterController cc;
 
-    // Start is called before the first frame update
     void Start()
     {
         //커서 숨기고 잠그기
@@ -21,10 +20,8 @@ public class PlayerController : MonoBehaviour
         cc = gameObject.GetComponent<CharacterController>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        //플레이어 카메러 회전
         float h = Input.GetAxis("Mouse X");
         float v = Input.GetAxis("Mouse Y");
 
@@ -33,8 +30,7 @@ public class PlayerController : MonoBehaviour
 
         my = Mathf.Clamp(my, -89, 89);
         transform.eulerAngles = new Vector3(-my, mx, 0);
-        /////
-        //플레이어 이동
+
         float h2 = Input.GetAxis("Horizontal");
         float v2 = Input.GetAxis("Vertical");
 
