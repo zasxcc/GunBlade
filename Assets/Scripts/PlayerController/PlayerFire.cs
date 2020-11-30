@@ -57,8 +57,6 @@ public class PlayerFire : MonoBehaviour
             heatGage += heatGageSpeed;
         else if (!isGunFire && heatGage > 1)
             heatGage -= heatGageSpeed;
-
-        Debug.LogError(heatGage);
         
     }
     private void GunFire()

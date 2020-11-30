@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
     private NavMeshAgent nvAgent;
     private Transform tr;
     private Transform targetTransform;
+    private Animator anim;
 
     void Awake()
     {
@@ -27,6 +28,7 @@ public class EnemyController : MonoBehaviour
     {
         tr = GetComponent<Transform>();
         nvAgent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
 
         //추적할 오브젝트 태그
         targetTransform = GameObject.FindWithTag("NavTarget").GetComponent<Transform>();
@@ -51,15 +53,16 @@ public class EnemyController : MonoBehaviour
                 currState = CurrentState.attack;
                 nvAgent.Stop();
                 //애니메이션적용
+                anim.SetBool("isRunning", false);
+                anim.SetBool("isAttacking", true);
 
-                //
             }
             else if(dist > attackDistance)
             {
                 currState = CurrentState.move;
 
                 //애니메이션적용
-
+                anim.SetBool("isRunning", true);
                 //
             }
             else
