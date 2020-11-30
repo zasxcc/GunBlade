@@ -5,10 +5,16 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float rotSpeed = 200.0f;
-    public float playerMoveSpeed = 5.0f;
+    
     public float HP = 100.0f;
+
     private float mx;
     private float my;
+
+    public Vector3[] wayPoint;
+    private Vector3 currPos;
+    private int wayPointIndex = 0;
+    public float playerMoveSpeed = 5.0f;
 
     CharacterController cc;
 
@@ -18,6 +24,14 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         cc = gameObject.GetComponent<CharacterController>();
+
+        wayPoint = new Vector3[6];
+        wayPoint.SetValue(new Vector3(5.13f, 12.76f, -20.2f),0);
+        wayPoint.SetValue(new Vector3(16.63f, 9.41f, -11.87f), 1);
+        wayPoint.SetValue(new Vector3(33.1f, 6.52f, -8.11f), 2);
+        wayPoint.SetValue(new Vector3(33.1f, 3.83f, 20.11f), 3);
+        wayPoint.SetValue(new Vector3(-6.44f, 6.14f, 20.11f), 4);
+        wayPoint.SetValue(new Vector3(9.40f, 6.940f, -5.020f), 5);
     }
 
     void FixedUpdate()
@@ -31,13 +45,19 @@ public class PlayerController : MonoBehaviour
         my = Mathf.Clamp(my, -89, 89);
         transform.eulerAngles = new Vector3(-my, mx, 0);
 
-        float h2 = Input.GetAxis("Horizontal");
-        float v2 = Input.GetAxis("Vertical");
+     
+        //이동 경로
+        currPos = transform.position;
+        if(wayPointIndex < wayPoint.Length)
+        {
+            float step = playerMoveSpeed * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(currPos, wayPoint[wayPointIndex], step);
 
-        Vector3 dir = new Vector3(h2, 0, v2);
-        dir.Normalize();
-        dir = Camera.main.transform.TransformDirection(dir);
-
-        cc.Move(dir * playerMoveSpeed * Time.deltaTime);
+            if(Vector3.Distance (wayPoint[wayPointIndex], currPos) == 0f)
+            {
+                if(wayPointIndex != 5)
+                    wayPointIndex++;
+            }
+        }
     }
 }
