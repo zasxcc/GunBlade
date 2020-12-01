@@ -13,11 +13,16 @@ public class EnemyController : MonoBehaviour
     private bool isDead = false;
     public float attackDistance = 10.0f;
 
+    private int attackCountIndex = 0;
+    public int attackTimer = 0;
+    public Transform firePos;
 
     private NavMeshAgent nvAgent;
     private Transform tr;
     private Transform targetTransform;
+    private Transform playerTransform;
     private Animator anim;
+    private ObjectPool op;
 
     void Awake()
     {
@@ -29,10 +34,12 @@ public class EnemyController : MonoBehaviour
         tr = GetComponent<Transform>();
         nvAgent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        op = GameObject.FindObjectOfType<ObjectPool>();
 
         //추적할 오브젝트 태그
         targetTransform = GameObject.FindWithTag("NavTarget").GetComponent<Transform>();
-    
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
+
         //추적 position 설정
         nvAgent.destination = targetTransform.position;
 
@@ -93,6 +100,23 @@ public class EnemyController : MonoBehaviour
                     break;
 
                 case CurrentState.attack:
+                    //HP에따라 타겟 설정
+                    if(HP > 70.0f)
+                        transform.LookAt(targetTransform);
+                    else if(HP <= 70.0f)
+                        transform.LookAt(playerTransform);
+
+                    if (attackTimer > 100)
+                    {
+                        attackCountIndex++;
+                        if (attackCountIndex >= op.GetEnemyBulletMaxCount())
+                        {
+                            attackCountIndex = 0;
+                        }
+                        attackTimer = 0;
+                        op.EnemyBulletCreate(attackCountIndex, firePos);
+                    }
+                    attackTimer++;
                     break;
             }
         }

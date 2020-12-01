@@ -8,6 +8,11 @@ public class ObjectPool : MonoBehaviour
     private List<PlayerBullet> playerMissilePool = new List<PlayerBullet>();
     private readonly int missileMaxCount = 5;
     public int currMissileIndex = 0;
+
+    [SerializeField] public EnemyBullet enemyBullet_prefab;
+    private List<EnemyBullet> enemyBulletPool = new List<EnemyBullet>();
+    private readonly int enemyBulletMaxCount = 100;
+    public int currEnemyBulletIndex = 0;
     private void Awake()
     {
        
@@ -19,6 +24,13 @@ public class ObjectPool : MonoBehaviour
             PlayerBullet pb = Instantiate<PlayerBullet>(playerMissile_prefab);
             pb.gameObject.SetActive(false);
             playerMissilePool.Add(pb);
+        }
+
+        for(int i = 0; i< enemyBulletMaxCount; ++i)
+        {
+            EnemyBullet eb = Instantiate<EnemyBullet>(enemyBullet_prefab);
+            eb.gameObject.SetActive(false);
+            enemyBulletPool.Add(eb);
         }
     }
 
@@ -33,6 +45,19 @@ public class ObjectPool : MonoBehaviour
     public int GetPlayerBulletMaxCount()
     {
         return missileMaxCount;
+    }
+
+    public void EnemyBulletCreate(int index, Transform firePos)
+    {
+        currEnemyBulletIndex = index;
+        enemyBulletPool[currEnemyBulletIndex].transform.position = firePos.position;
+        enemyBulletPool[currEnemyBulletIndex].transform.rotation = firePos.rotation;
+        enemyBulletPool[currEnemyBulletIndex].gameObject.SetActive(true);
+    }
+
+    public int GetEnemyBulletMaxCount()
+    {
+        return enemyBulletMaxCount;
     }
 
    
