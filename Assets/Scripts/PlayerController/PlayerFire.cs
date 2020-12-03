@@ -66,6 +66,13 @@ public class PlayerFire : MonoBehaviour
         {
             GameObject hitSpark = Instantiate(hitSparkPrefab, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal));
             Destroy(hitSpark, 1.0f);
+
+            
+            var target = hit.collider.GetComponent<EnemyController>();
+            if(target != null)
+            {
+                target.HP -= 1.0f;
+            }
         }
         
     }

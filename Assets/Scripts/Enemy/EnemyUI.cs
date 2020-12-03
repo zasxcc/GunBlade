@@ -20,6 +20,5 @@ public class EnemyUI : MonoBehaviour
     {
         canvas.transform.LookAt(playerTransform);
         sliderHP.value = enemyController.HP;
-        
     }
 }
