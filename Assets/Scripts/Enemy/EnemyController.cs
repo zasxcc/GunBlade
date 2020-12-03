@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     public enum CurrentState {  idle, move, attack, dead };
     private CurrentState currState = CurrentState.idle;
 
-    public float HP = 100.0f;
+    public float HP = 50.0f;
     public float speed;
     private bool isDead = false;
     public float attackDistance = 10.0f;
