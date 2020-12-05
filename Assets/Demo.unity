@@ -63372,6 +63372,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4021812722045927432, guid: 138b91258309bc34e8e959d5b185adb9, type: 3}
+      propertyPath: DeadParticlePrefab
+      value: 
+      objectReference: {fileID: 19800006, guid: 2a474af3f4c27be4e9bdce39cfe4315d, type: 3}
+    - target: {fileID: 4021812722045927432, guid: 138b91258309bc34e8e959d5b185adb9, type: 3}
+      propertyPath: HP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6335068701510113367, guid: 138b91258309bc34e8e959d5b185adb9, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 117013599}
+    - target: {fileID: 6733438212232871253, guid: 138b91258309bc34e8e959d5b185adb9, type: 3}
+      propertyPath: m_Value
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7694761250455106908, guid: 138b91258309bc34e8e959d5b185adb9, type: 3}
       propertyPath: m_Name
       value: Soldier_demo
@@ -63418,6 +63434,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7694761250455464252, guid: 138b91258309bc34e8e959d5b185adb9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138306382719452444, guid: 138b91258309bc34e8e959d5b185adb9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9138306382719452444, guid: 138b91258309bc34e8e959d5b185adb9, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

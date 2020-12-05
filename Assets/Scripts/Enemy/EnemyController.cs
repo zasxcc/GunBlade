@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     public enum CurrentState {  idle, move, attack, dead };
     private CurrentState currState = CurrentState.idle;
 
-    public float HP = 50.0f;
+    public float HP = 100.0f;
     public float speed;
     private bool isDead = false;
     public float attackDistance = 10.0f;
@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour
     private Transform playerTransform;
     private Animator anim;
     private ObjectPool op;
+
+    public ParticleSystem DeadParticlePrefab;
 
     void Awake()
     {
@@ -86,6 +88,11 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        if(HP <= 0.0f)
+        {
+            isDead = true;
+        }
+
         if (!isDead)
         {
             switch (currState)
@@ -119,6 +126,11 @@ public class EnemyController : MonoBehaviour
                     attackTimer++;
                     break;
             }
+        }
+        else
+        {
+            Instantiate(DeadParticlePrefab.gameObject, firePos.position, Quaternion.FromToRotation(Vector3.forward, tr.forward));
+            Destroy(this.gameObject);
         }
     }
 }
