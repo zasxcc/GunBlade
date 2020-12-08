@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
     {
         while(!isDead)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.1f);
 
             //타겟과의 거리
             float dist = Vector3.Distance(targetTransform.position, tr.position);
@@ -108,10 +108,12 @@ public class EnemyController : MonoBehaviour
 
                 case CurrentState.attack:
                     //HP에따라 타겟 설정
-                    if(HP > 70.0f)
+                    if (HP > 70.0f)
                         transform.LookAt(targetTransform);
-                    else if(HP <= 70.0f)
+                    else if (HP <= 70.0f)
+                    {
                         transform.LookAt(playerTransform);
+                    }
 
                     if (attackTimer > 100)
                     {

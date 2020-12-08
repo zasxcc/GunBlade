@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float rotSpeed = 200.0f;
-    
     public float HP = 100.0f;
 
     private float mx;
@@ -45,19 +44,27 @@ public class PlayerController : MonoBehaviour
         my = Mathf.Clamp(my, -89, 89);
         transform.eulerAngles = new Vector3(-my, mx, 0);
 
-     
+
         //이동 경로
         currPos = transform.position;
-        if(wayPointIndex < wayPoint.Length)
+        if (wayPointIndex < wayPoint.Length)
         {
             float step = playerMoveSpeed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(currPos, wayPoint[wayPointIndex], step);
 
-            if(Vector3.Distance (wayPoint[wayPointIndex], currPos) == 0f)
+            if (Vector3.Distance(wayPoint[wayPointIndex], currPos) == 0f)
             {
-                if(wayPointIndex != 5)
+                if (wayPointIndex != 5)
                     wayPointIndex++;
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.name == "EnemyBullet(Clone)")
+        {
+            HP -= 10.0f;
         }
     }
 }
