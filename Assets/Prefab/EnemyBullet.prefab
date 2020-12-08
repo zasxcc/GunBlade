@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9fdbf15141ec0b41bf5dc4f612fcbe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeTime: 300
+  life: 0
 --- !u!54 &3905236296513882849
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour
     private bool isDead = false;
     public float attackDistance = 10.0f;
 
-    private int attackCountIndex = 0;
     public int attackTimer = 0;
     public Transform firePos;
 
@@ -117,18 +116,19 @@ public class EnemyController : MonoBehaviour
 
                     if (attackTimer > 100)
                     {
-                        attackCountIndex++;
-                        if (attackCountIndex >= op.GetEnemyBulletMaxCount())
+                        op.currEnemyBulletIndex++;
+                        if (op.currEnemyBulletIndex >= op.GetEnemyBulletMaxCount())
                         {
-                            attackCountIndex = 0;
+                            op.currEnemyBulletIndex = 0;
                         }
                         attackTimer = 0;
-                        op.EnemyBulletCreate(attackCountIndex, firePos);
+                        op.EnemyBulletCreate(op.currEnemyBulletIndex, firePos);
                     }
                     attackTimer++;
                     break;
             }
         }
+        //죽을때
         else
         {
             Instantiate(DeadParticlePrefab.gameObject, firePos.position, Quaternion.FromToRotation(Vector3.forward, tr.forward));
