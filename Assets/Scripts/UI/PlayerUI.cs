@@ -5,18 +5,20 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-    Slider sliderHP;
-    float fSliderBarTime;
+    public Slider sliderHP;
+    public Slider heatGage;
     public PlayerController player;
+    public PlayerFire playerFire;
 
     void Start()
     {
-        sliderHP = GetComponent<Slider>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        playerFire = GameObject.FindWithTag("Player").GetComponent<PlayerFire>();
     }
 
     void Update()
     {
         sliderHP.value = player.HP;
+        heatGage.value = playerFire.heatGage;
     }
 }

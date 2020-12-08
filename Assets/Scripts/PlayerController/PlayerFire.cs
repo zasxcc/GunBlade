@@ -12,7 +12,7 @@ public class PlayerFire : MonoBehaviour
     private int missileCount = 0;
     public int missileTimer = 0;
 
-    private int heatGage =0;
+    public int heatGage =0;
     public int heatGageSpeed = 1;
     public int maxHeatGage = 300;
 
@@ -31,14 +31,17 @@ public class PlayerFire : MonoBehaviour
         {
             GunFire();
             //산탄원 커짐
-            accuracy += 0.0002f;
+            if (accuracy <= 0.067f)
+            {
+                accuracy += 0.0004f;
+            }
             isGunFire = true;
         }
         else
         {
             //산탄원 회복
-            if (accuracy > 0.00f)
-                accuracy -= 0.0003f;
+            if (accuracy > 0.00000f)
+                accuracy -= 0.0004f;
             isGunFire = false;
         }
         //미사일
