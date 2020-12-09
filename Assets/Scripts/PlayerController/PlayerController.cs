@@ -56,6 +56,8 @@ public class PlayerController : MonoBehaviour
             {
                 if (wayPointIndex != 5)
                     wayPointIndex++;
+                else if(wayPointIndex == 5)
+                    wayPointIndex = 0;
             }
         }
     }
