@@ -131,6 +131,7 @@ public class EnemyController : MonoBehaviour
         //죽을때
         else
         {
+            GameManager.instance.AddScore(10);
             Instantiate(DeadParticlePrefab.gameObject, firePos.position, Quaternion.FromToRotation(Vector3.forward, tr.forward));
             Destroy(this.gameObject);
         }
