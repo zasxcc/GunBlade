@@ -74,7 +74,7 @@ public class PlayerFire : MonoBehaviour
             var target = hit.collider.GetComponent<EnemyController>();
             if(target != null)
             {
-                target.HP -= 1.0f;
+                target.HP -= 5.0f;
             }
         }
         

@@ -23,6 +23,8 @@ public class EnemyController : MonoBehaviour
     private Animator anim;
     private ObjectPool op;
 
+    public int index;
+
     public ParticleSystem DeadParticlePrefab;
 
     void Awake()
@@ -43,20 +45,25 @@ public class EnemyController : MonoBehaviour
 
         //추적 position 설정
         nvAgent.destination = targetTransform.position;
-
-        StartCoroutine(CheckState());
+        index = op.currEnemyIndex;
+        //StartCoroutine(CheckState());
+        
     }
 
-    IEnumerator CheckState()
-    {
-        while(!isDead)
-        {
-            yield return new WaitForSeconds(0.1f);
+    //IEnumerator CheckState()
+    //{
+        
+    //}
 
+
+    void Update()
+    {
+        if (!isDead)
+        {
             //타겟과의 거리
             float dist = Vector3.Distance(targetTransform.position, tr.position);
 
-            if(dist <= attackDistance)
+            if (dist <= attackDistance)
             {
                 currState = CurrentState.attack;
                 nvAgent.Stop();
@@ -65,7 +72,7 @@ public class EnemyController : MonoBehaviour
                 anim.SetBool("isAttacking", true);
 
             }
-            else if(dist > attackDistance)
+            else if (dist > attackDistance)
             {
                 currState = CurrentState.move;
 
@@ -76,18 +83,11 @@ public class EnemyController : MonoBehaviour
             else
             {
                 currState = CurrentState.idle;
-
-                //애니메이션적용
-
-                //
             }
         }
-    }
+        
 
-
-    void Update()
-    {
-        if(HP <= 0.0f)
+        if (HP <= 0.0f)
         {
             isDead = true;
         }
@@ -133,7 +133,14 @@ public class EnemyController : MonoBehaviour
         {
             GameManager.instance.AddScore(10);
             Instantiate(DeadParticlePrefab.gameObject, firePos.position, Quaternion.FromToRotation(Vector3.forward, tr.forward));
-            Destroy(this.gameObject);
+            op.enemyPool_1[index].gameObject.SetActive(false);
         }
+    }
+    public void Init()
+    {
+        HP = 100.0f;
+        isDead = false;
+        currState = CurrentState.idle;
+        attackTimer = 0;
     }
 }

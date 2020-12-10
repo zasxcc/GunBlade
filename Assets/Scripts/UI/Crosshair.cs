@@ -21,7 +21,7 @@ public class Crosshair : MonoBehaviour
 
     private void Update()
     {
-        if(isMoving)
+        if(isAttack)
         {
             currentSize = Mathf.Lerp(currentSize, maxSize, Time.deltaTime * maxSpeed);
         }
@@ -33,7 +33,7 @@ public class Crosshair : MonoBehaviour
         reticle.sizeDelta = new Vector2(currentSize, currentSize);
     }
 
-    bool isMoving
+    bool isAttack
     {
         get
         {

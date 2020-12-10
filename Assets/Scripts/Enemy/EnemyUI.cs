@@ -7,18 +7,19 @@ public class EnemyUI : MonoBehaviour
 {
     private EnemyController enemyController;
     private Canvas canvas;
-    public Transform playerTransform;
+    private PlayerController playerTransform;
     Slider sliderHP;
     void Start()
     {
         canvas = GetComponent<Canvas>();
         enemyController = GetComponentInParent<EnemyController>();
         sliderHP = GetComponentInChildren<Slider>();
+        playerTransform = GameObject.FindObjectOfType<PlayerController>();
     }
 
     void LateUpdate()
     {
-        canvas.transform.LookAt(playerTransform);
+        canvas.transform.LookAt(playerTransform.transform);
         sliderHP.value = enemyController.HP;
     }
 }

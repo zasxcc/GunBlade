@@ -46,20 +46,20 @@ public class PlayerController : MonoBehaviour
 
 
         //이동 경로
-        currPos = transform.position;
-        if (wayPointIndex < wayPoint.Length)
-        {
-            float step = playerMoveSpeed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(currPos, wayPoint[wayPointIndex], step);
+        //currPos = transform.position;
+        //if (wayPointIndex < wayPoint.Length)
+        //{
+        //    float step = playerMoveSpeed * Time.deltaTime;
+        //    transform.position = Vector3.MoveTowards(currPos, wayPoint[wayPointIndex], step);
 
-            if (Vector3.Distance(wayPoint[wayPointIndex], currPos) == 0f)
-            {
-                if (wayPointIndex != 5)
-                    wayPointIndex++;
-                else if(wayPointIndex == 5)
-                    wayPointIndex = 0;
-            }
-        }
+        //    if (Vector3.Distance(wayPoint[wayPointIndex], currPos) == 0f)
+        //    {
+        //        if (wayPointIndex != 5)
+        //            wayPointIndex++;
+        //        else if(wayPointIndex == 5)
+        //            wayPointIndex = 0;
+        //    }
+        //}
     }
 
     private void OnTriggerEnter(Collider other)

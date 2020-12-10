@@ -11,8 +11,13 @@ public class ObjectPool : MonoBehaviour
 
     [SerializeField] public EnemyBullet enemyBullet_prefab;
     private List<EnemyBullet> enemyBulletPool = new List<EnemyBullet>();
-    private readonly int enemyBulletMaxCount = 100;
+    private readonly int enemyBulletMaxCount = 5;
     public int currEnemyBulletIndex = 0;
+
+    [SerializeField] public EnemyController enemy_prefab_1;
+    public List<EnemyController> enemyPool_1 = new List<EnemyController>();
+    private readonly int enemyMaxCount_1 = 20;
+    public int currEnemyIndex = 0;
     private void Awake()
     {
        
@@ -31,6 +36,13 @@ public class ObjectPool : MonoBehaviour
             EnemyBullet eb = Instantiate<EnemyBullet>(enemyBullet_prefab);
             eb.gameObject.SetActive(false);
             enemyBulletPool.Add(eb);
+        }
+
+        for (int i = 0; i < enemyMaxCount_1; ++i)
+        {
+            EnemyController ec = Instantiate<EnemyController>(enemy_prefab_1);
+            ec.gameObject.SetActive(false);
+            enemyPool_1.Add(ec);
         }
     }
 
@@ -60,7 +72,28 @@ public class ObjectPool : MonoBehaviour
         return enemyBulletMaxCount;
     }
 
-   
+    public void EnemyCreate(Transform spawnPos)
+    {
+        for(int i = 0; i< enemyMaxCount_1; ++i)
+        {
+            if(enemyPool_1[i].gameObject.activeSelf == false)
+            {
+                enemyPool_1[i].transform.position = spawnPos.position;
+                enemyPool_1[i].transform.rotation = spawnPos.rotation;
+                currEnemyIndex = i;
+                enemyPool_1[i].Init();
+                enemyPool_1[i].gameObject.SetActive(true);
+                break;
+            }
+        }
+    }
+
+    public int GetEnemyMaxCount()
+    {
+        return enemyBulletMaxCount;
+    }
+
+
     void Update()
     {
         
