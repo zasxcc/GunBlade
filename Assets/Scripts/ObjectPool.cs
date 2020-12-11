@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] public PlayerBullet playerMissile_prefab;
-    private List<PlayerBullet> playerMissilePool = new List<PlayerBullet>();
+    [SerializeField] public PlayerMissile playerMissile_prefab;
+    private List<PlayerMissile> playerMissilePool = new List<PlayerMissile>();
     private readonly int missileMaxCount = 5;
     public int currMissileIndex = 0;
 
     [SerializeField] public EnemyBullet enemyBullet_prefab;
     private List<EnemyBullet> enemyBulletPool = new List<EnemyBullet>();
-    private readonly int enemyBulletMaxCount = 5;
+    private readonly int enemyBulletMaxCount = 50;
     public int currEnemyBulletIndex = 0;
 
     [SerializeField] public EnemyController enemy_prefab_1;
@@ -26,7 +26,7 @@ public class ObjectPool : MonoBehaviour
     {
         for (int i = 0; i < missileMaxCount; ++i)
         {
-            PlayerBullet pb = Instantiate<PlayerBullet>(playerMissile_prefab);
+            PlayerMissile pb = Instantiate<PlayerMissile>(playerMissile_prefab);
             pb.gameObject.SetActive(false);
             playerMissilePool.Add(pb);
         }

@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.name == "EnemyBullet(Clone)")
         {
             HP -= 10.0f;
+            other.gameObject.SetActive(false);
         }
     }
 }
