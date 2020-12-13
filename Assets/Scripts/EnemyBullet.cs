@@ -23,8 +23,8 @@ public class EnemyBullet : MonoBehaviour
         life++;
         if(lifeTime < life)
         {
-            this.gameObject.SetActive(false);
             life = 0;
+            this.gameObject.SetActive(false);
         }
     }
 }
