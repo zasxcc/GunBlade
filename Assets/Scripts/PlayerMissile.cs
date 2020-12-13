@@ -35,6 +35,12 @@ public class PlayerMissile : MonoBehaviour
         GameObject explosion = Instantiate(explosionPrefab, tr.position, Quaternion.FromToRotation(Vector3.up, tr.position));
         Destroy(explosion, 1.0f);
 
+        var target = other.GetComponent<EnemyController>();
+        if(target != null)
+        {
+            target.HP -= 50.0f;
+        }
+
         InitObject();
         gameObject.SetActive(false);
     }

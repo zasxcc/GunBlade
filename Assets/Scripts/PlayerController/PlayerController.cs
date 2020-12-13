@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float rotSpeed = 200.0f;
@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 currPos;
     private int wayPointIndex = 0;
     public float playerMoveSpeed = 5.0f;
+
+    public TargetController tc;
 
     CharacterController cc;
 
@@ -59,6 +61,11 @@ public class PlayerController : MonoBehaviour
                 else if (wayPointIndex == 5)
                     wayPointIndex = 0;
             }
+        }
+
+        if(HP < 1.0f || tc.HP <= 0.0f)
+        {
+            SceneManager.LoadScene("HighScoreScene");
         }
     }
 

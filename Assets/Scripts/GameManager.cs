@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     {
         score += num; 
         scoreText.text = "Score : " + score;
+        PlayerPrefs.SetInt("Score", score);
+        PlayerPrefs.Save();
     }
 
     // Update is called once per frame
