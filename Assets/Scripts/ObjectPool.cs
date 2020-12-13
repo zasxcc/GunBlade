@@ -6,17 +6,17 @@ public class ObjectPool : MonoBehaviour
 {
     [SerializeField] public PlayerMissile playerMissile_prefab;
     private List<PlayerMissile> playerMissilePool = new List<PlayerMissile>();
-    private readonly int missileMaxCount = 5;
+    private readonly int missileMaxCount = 10;
     public int currMissileIndex = 0;
 
     [SerializeField] public EnemyBullet enemyBullet_prefab;
     private List<EnemyBullet> enemyBulletPool = new List<EnemyBullet>();
-    private readonly int enemyBulletMaxCount = 50;
+    private readonly int enemyBulletMaxCount = 80;
     public int currEnemyBulletIndex = 0;
 
     [SerializeField] public EnemyController enemy_prefab_1;
     public List<EnemyController> enemyPool_1 = new List<EnemyController>();
-    private readonly int enemyMaxCount_1 = 20;
+    private readonly int enemyMaxCount_1 = 30;
     public int currEnemyIndex = 0;
     private void Awake()
     {

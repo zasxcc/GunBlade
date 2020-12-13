@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     public float HP = 100.0f;
     public float speed;
     private bool isDead = false;
-    public float attackDistance = 10.0f;
+    public float attackDistance = 20.0f;
 
     public int attackTimer = 0;
     public Transform firePos;
