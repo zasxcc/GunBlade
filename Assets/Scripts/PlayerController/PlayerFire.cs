@@ -18,10 +18,11 @@ public class PlayerFire : MonoBehaviour
     private int missileCount = 0;
     public int missileTimer = 0;
 
-    public int heatGage =0;
+    public int heatGage = 0;
     public int heatGageSpeed = 1;
     public int maxHeatGage = 300;
 
+    private bool penalty = false;
     private bool isGunFire = false;
     public float accuracy = 0.000000000f;
     private int gunSoundDelay = 6;
@@ -34,7 +35,7 @@ public class PlayerFire : MonoBehaviour
     void Update()
     {
         //미니건 
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") && heatGage < 300)
         {
             GunFire();
             //산탄원 커짐
@@ -66,12 +67,20 @@ public class PlayerFire : MonoBehaviour
         }
         else
         {
-            if(missileTimer>0)
+            if (missileTimer > 0)
                 missileTimer -= 1;
         }
 
         if (isGunFire && heatGage < maxHeatGage)
+        {
             heatGage += heatGageSpeed;
+            penalty = true;
+        }
+        else if (heatGage == maxHeatGage && penalty)
+        {
+            heatGage = 400;
+            penalty = false;
+        }
         else if (!isGunFire && heatGage > 1)
             heatGage -= heatGageSpeed;
 

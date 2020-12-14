@@ -11,6 +11,7 @@ public class PlayerUI : MonoBehaviour
     public PlayerController player;
     public PlayerFire playerFire;
     public TargetController tc;
+    public Image heatImage;
 
     void Start()
     {
@@ -24,6 +25,15 @@ public class PlayerUI : MonoBehaviour
         sliderHP.value = player.HP;
         heatGage.value = playerFire.heatGage;
         targetHP.value = tc.HP;
+
+        if(heatGage.value > 260)
+        {
+            heatImage.color = new Color(1.0f, 0.0f, 0.0f);
+        }
+        else
+        {
+            heatImage.color = new Color(1.0f, 1.0f, 0.0f);
+        }
 
     }
 }

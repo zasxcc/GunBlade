@@ -10575,6 +10575,7 @@ MonoBehaviour:
   player: {fileID: 117013598}
   playerFire: {fileID: 117013597}
   tc: {fileID: 4695146437319378854}
+  heatImage: {fileID: 781370079}
 --- !u!1001 &273361842
 PrefabInstance:
   m_ObjectHideFlags: 0
