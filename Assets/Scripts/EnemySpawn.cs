@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    public int spawnTime;
+    private float currspawnTime = 0;
+    public float spawnTime = 0;
     private Transform spawnPos;
     private ObjectPool op;
+    public GameManager gm;
 
     // Start is called before the first frame update
     void Start()
@@ -18,12 +20,18 @@ public class EnemySpawn : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (spawnTime > 100)
+        if (currspawnTime > spawnTime)
         {
             op.EnemyCreate(spawnPos);
-            spawnTime = 0;
+            currspawnTime = 0;
+        }
+
+        currspawnTime++;
+        if(gm.enemyCount > 10)
+        {
+            spawnTime = spawnTime * 0.9f;
+            gm.enemyCount = 0;
         }
         
-        spawnTime++;
     }
 }

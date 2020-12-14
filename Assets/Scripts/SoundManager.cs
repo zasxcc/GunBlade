@@ -8,7 +8,6 @@ public class SoundManager : MonoBehaviour
     AudioSource myAudio;
 
     public AudioClip playerGunSound;
-    public AudioClip enemyGunSound;
     public AudioClip explosionSound;
 
     private void Awake()
@@ -33,10 +32,6 @@ public class SoundManager : MonoBehaviour
         myAudio.PlayOneShot(playerGunSound);
     }
 
-    public void PlayEnemyGunSound()
-    {
-        myAudio.PlayOneShot(enemyGunSound);
-    }
 
     public void PlayExplosionSound()
     {

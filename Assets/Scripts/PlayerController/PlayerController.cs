@@ -27,12 +27,12 @@ public class PlayerController : MonoBehaviour
         cc = gameObject.GetComponent<CharacterController>();
 
         wayPoint = new Vector3[6];
-        wayPoint.SetValue(new Vector3(5.13f, 12.76f, -20.2f),0);
-        wayPoint.SetValue(new Vector3(16.63f, 9.41f, -11.87f), 1);
-        wayPoint.SetValue(new Vector3(33.1f, 6.52f, -8.11f), 2);
-        wayPoint.SetValue(new Vector3(33.1f, 3.83f, 20.11f), 3);
-        wayPoint.SetValue(new Vector3(-6.44f, 6.14f, 20.11f), 4);
-        wayPoint.SetValue(new Vector3(9.40f, 6.940f, -5.020f), 5);
+        wayPoint.SetValue(new Vector3(5.13f, 14.76f, -20.2f),0);
+        wayPoint.SetValue(new Vector3(16.63f, 10.41f, -11.87f), 1);
+        wayPoint.SetValue(new Vector3(33.1f, 7.52f, -8.11f), 2);
+        wayPoint.SetValue(new Vector3(33.1f, 4.83f, 20.11f), 3);
+        wayPoint.SetValue(new Vector3(-6.44f, 7.14f, 20.11f), 4);
+        wayPoint.SetValue(new Vector3(9.40f, 7.940f, -5.020f), 5);
     }
 
     void FixedUpdate()

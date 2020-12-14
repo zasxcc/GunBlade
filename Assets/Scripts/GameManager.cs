@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Text scoreText;
-    private int score = 0;
+    public int score = 0;
+    public int enemyCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +21,13 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int num)
     {
+        enemyCount++;
         score += num; 
         scoreText.text = "Score : " + score;
         PlayerPrefs.SetInt("Score", score);
         PlayerPrefs.Save();
     }
+
 
     // Update is called once per frame
     void Update()

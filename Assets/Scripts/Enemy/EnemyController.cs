@@ -22,6 +22,7 @@ public class EnemyController : MonoBehaviour
     private Transform playerTransform;
     private Animator anim;
     private ObjectPool op;
+    public EnemySoundManager esm;
 
     public int index;
 
@@ -123,7 +124,7 @@ public class EnemyController : MonoBehaviour
                         }
                         attackTimer = 0;
                         op.EnemyBulletCreate(op.currEnemyBulletIndex, firePos);
-                        SoundManager.instance.PlayEnemyGunSound();
+                        esm.PlayEnemyGunSound();
                     }
                     attackTimer++;
                     break;
