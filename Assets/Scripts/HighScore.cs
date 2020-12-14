@@ -12,7 +12,7 @@ public class HighScore : MonoBehaviour
     void Start()
     {
         highScore = GetComponent<Text>();
-        score = PlayerPrefs.GetInt("Score", default);
+        score = PlayerPrefs.GetInt("Score");
     }
 
     // Update is called once per frame
