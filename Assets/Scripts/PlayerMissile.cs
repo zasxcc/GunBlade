@@ -31,7 +31,7 @@ public class PlayerMissile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.LogError("Q");
+        SoundManager.instance.PlayExplosionSound();
         GameObject explosion = Instantiate(explosionPrefab, tr.position, Quaternion.FromToRotation(Vector3.up, tr.position));
         Destroy(explosion, 1.0f);
 

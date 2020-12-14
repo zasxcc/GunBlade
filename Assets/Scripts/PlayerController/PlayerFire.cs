@@ -23,6 +23,7 @@ public class PlayerFire : MonoBehaviour
 
     private bool isGunFire = false;
     public float accuracy = 0.000000000f;
+    private int gunSoundDelay = 6;
 
     void Start()
     {
@@ -41,6 +42,13 @@ public class PlayerFire : MonoBehaviour
                 accuracy += 0.0004f;
             }
             isGunFire = true;
+
+            if (gunSoundDelay > 5)
+            {
+                SoundManager.instance.PlayGunSound();
+                gunSoundDelay = 0;
+            }
+            gunSoundDelay++;
         }
         else
         {
@@ -65,6 +73,11 @@ public class PlayerFire : MonoBehaviour
             heatGage += heatGageSpeed;
         else if (!isGunFire && heatGage > 1)
             heatGage -= heatGageSpeed;
+
+        if(Input.GetButtonUp("Fire1"))
+        {
+            gunSoundDelay = 6;
+        }
         
     }
     private void GunFire()

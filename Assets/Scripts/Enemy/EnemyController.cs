@@ -123,6 +123,7 @@ public class EnemyController : MonoBehaviour
                         }
                         attackTimer = 0;
                         op.EnemyBulletCreate(op.currEnemyBulletIndex, firePos);
+                        SoundManager.instance.PlayEnemyGunSound();
                     }
                     attackTimer++;
                     break;
