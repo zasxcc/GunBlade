@@ -25,4 +25,11 @@ public class TitleSceneManager : MonoBehaviour
         Debug.Log("TitleSceneManager.OnClickButton_Exit() is Called");
         Application.Quit();
     }
+
+    private void Awake()
+    {
+        //게임씬 갓다오면 커서가 잠기므로 잠긴거 풀고 보이게하기 위함
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
 }
