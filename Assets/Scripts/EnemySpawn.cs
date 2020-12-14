@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
-    private float currspawnTime = 0;
+    public float currspawnTime;
     public float spawnTime = 0;
     private Transform spawnPos;
     private ObjectPool op;
@@ -15,6 +15,7 @@ public class EnemySpawn : MonoBehaviour
     {
         spawnPos = GetComponent<Transform>();
         op = GameObject.FindObjectOfType<ObjectPool>();
+        currspawnTime = Random.Range(0.0f, 200.0f);
     }
 
     // Update is called once per frame

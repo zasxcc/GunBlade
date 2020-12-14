@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     private Animator anim;
     private ObjectPool op;
     public EnemySoundManager esm;
+    public TargetController tc;
 
     public int index;
 
@@ -42,6 +43,7 @@ public class EnemyController : MonoBehaviour
 
         //추적할 오브젝트 태그
         targetTransform = GameObject.FindWithTag("NavTarget").GetComponent<Transform>();
+        tc = GameObject.FindWithTag("NavTarget").GetComponent<TargetController>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
 
         //추적 position 설정
@@ -133,9 +135,11 @@ public class EnemyController : MonoBehaviour
         //죽을때
         else
         {
+            tc.HP += 0.5f;
             GameManager.instance.AddScore(10);
             Instantiate(DeadParticlePrefab.gameObject, firePos.position, Quaternion.FromToRotation(Vector3.forward, tr.forward));
             op.enemyPool_1[index].gameObject.SetActive(false);
+            
         }
     }
     public void Init()
