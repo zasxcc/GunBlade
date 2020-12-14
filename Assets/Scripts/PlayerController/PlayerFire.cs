@@ -13,6 +13,7 @@ public class PlayerFire : MonoBehaviour
 
     public Transform flamePosR;
     public Transform flamePosL;
+    private bool RLEffect = false;
 
     private int missileCount = 0;
     public int missileTimer = 0;
@@ -82,12 +83,18 @@ public class PlayerFire : MonoBehaviour
     }
     private void GunFire()
     {
-        GameObject fireEffectR = Instantiate(fireEffectPrefab, flamePosR.position, Quaternion.FromToRotation(Vector3.up, flamePosR.position));
-        Destroy(fireEffectR, 1.0f);
-
-        GameObject fireEffectL = Instantiate(fireEffectPrefab, flamePosL.position, Quaternion.FromToRotation(Vector3.up, flamePosL.position));
-        Destroy(fireEffectL, 1.0f);
-
+        if (RLEffect)
+        {
+            GameObject fireEffectR = Instantiate(fireEffectPrefab, flamePosR.position, Quaternion.FromToRotation(Vector3.up, flamePosR.position));
+            Destroy(fireEffectR, 1.0f);
+            RLEffect = false;
+        }
+        else
+        {
+            GameObject fireEffectL = Instantiate(fireEffectPrefab, flamePosL.position, Quaternion.FromToRotation(Vector3.up, flamePosL.position));
+            Destroy(fireEffectL, 1.0f);
+            RLEffect = true;
+        }
         RaycastHit hit;
         if (Physics.Raycast(gunFirePos.position, gunFirePos.transform.forward + Random.onUnitSphere * accuracy, out hit))
         {
