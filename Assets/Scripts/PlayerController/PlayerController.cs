@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private int wayPointIndex = 0;
     public float playerMoveSpeed = 5.0f;
 
+    public bool pause;
+
     public TargetController tc;
 
     CharacterController cc;
@@ -66,6 +68,11 @@ public class PlayerController : MonoBehaviour
         if(HP < 1.0f || tc.HP <= 0.0f)
         {
             SceneManager.LoadScene("HighScoreScene");
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("TitleScene");
         }
     }
 
